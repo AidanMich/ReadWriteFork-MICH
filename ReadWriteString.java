@@ -24,7 +24,18 @@ class ReadWriteString {
         }
     }
 
-    public static void main(String[] args) {
+    public static int countCharacters(String fileName) throws IOException {
+        int count = 0;
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        while (br.ready()) {
+            br.read();
+            count++;
+        }
+        br.close();
+        return count;
+    }
+
+    public static void main(String[] args) throws IOException {
         ReadWriteString fileHandler = new ReadWriteString();
 
         // Reading from a file
@@ -37,5 +48,8 @@ class ReadWriteString {
         String fileNameToWrite = "output.txt";
         fileHandler.WriteString(contentToWrite, fileNameToWrite);
         System.out.println("Content written to file.");
+
+        System.out.println("character count" + countCharacters(fileNameToWrite));
+
     }
 }
